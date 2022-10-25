@@ -80,7 +80,6 @@ export default {
             'cell-left-clicked': cellState.mouseLeftClicked || cellState.mouseLeftDown , 
         }))
 
-
         watch(() => props.gameStatus, (gameStatus) => {
             if (gameStatus === -1){
                 // Game reset
@@ -110,26 +109,9 @@ export default {
             cellState.mouseLeftDown = true
         })
 
-        // const mouseDown = () => {
-        //     // Disable any click
-        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-        //         return false
-        //     }
-        //     cellState.mouseLeftDown = true
-        // }
-
         const mouseLeave = checkClickable(() => {
             cellState.mouseLeftDown = false
         })
-
-        // const mouseLeave = () => {
-        //     // Disable any click
-        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-        //         return false
-        //     }
-        //     cellState.mouseLeftDown = false
-        // }
-
 
         const leftClick = checkClickable(() => {
             cellState.mouseLeftClicked = true
@@ -140,20 +122,6 @@ export default {
                 cellState.bgColor = "red"
             }
         })
-        // const leftClick = () => {
-        //     // Disable any click
-        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-        //         return false
-        //     }
-
-        //     cellState.mouseLeftClicked = true
-        //     const clickBomb = props.value === -1 ? true: false
-        //     emit("leftClick", props.gridRow-1, props.gridCol-1, clickBomb)
-
-        //     if (clickBomb){
-        //         cellState.bgColor = "red"
-        //     }
-        // }
         
         const rightClick = () => {
             // Disable any click
