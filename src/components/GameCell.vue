@@ -97,29 +97,41 @@ export default {
 
         })
 
-
-        const mouseDown = () => {
-            // Disable any click
-            if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-                return false
+        const checkClickable = (fn) => {
+            return function(){
+                if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
+                    return false
+                }
+                fn()
             }
+        }
+
+        const mouseDown = checkClickable(() => {
             cellState.mouseLeftDown = true
-        }
+        })
 
-        const mouseLeave = () => {
-            // Disable any click
-            if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-                return false
-            }
+        // const mouseDown = () => {
+        //     // Disable any click
+        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
+        //         return false
+        //     }
+        //     cellState.mouseLeftDown = true
+        // }
+
+        const mouseLeave = checkClickable(() => {
             cellState.mouseLeftDown = false
-        }
+        })
 
-        const leftClick = () => {
-            // Disable any click
-            if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
-                return false
-            }
+        // const mouseLeave = () => {
+        //     // Disable any click
+        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
+        //         return false
+        //     }
+        //     cellState.mouseLeftDown = false
+        // }
 
+
+        const leftClick = checkClickable(() => {
             cellState.mouseLeftClicked = true
             const clickBomb = props.value === -1 ? true: false
             emit("leftClick", props.gridRow-1, props.gridCol-1, clickBomb)
@@ -127,7 +139,21 @@ export default {
             if (clickBomb){
                 cellState.bgColor = "red"
             }
-        }
+        })
+        // const leftClick = () => {
+        //     // Disable any click
+        //     if((props.gameStatus >= 1) || props.cellFlipped || cellState.mouseRightClicked){
+        //         return false
+        //     }
+
+        //     cellState.mouseLeftClicked = true
+        //     const clickBomb = props.value === -1 ? true: false
+        //     emit("leftClick", props.gridRow-1, props.gridCol-1, clickBomb)
+
+        //     if (clickBomb){
+        //         cellState.bgColor = "red"
+        //     }
+        // }
         
         const rightClick = () => {
             // Disable any click

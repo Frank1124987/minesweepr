@@ -29,9 +29,9 @@
     </div>  
 </template>
 <script>
-import ScoreBoardMineCounter from "@/components/ScoreBoard/ScoreBoardMineCounter.vue";
-import ScoreBoardTimeCounter from "@/components/ScoreBoard/ScoreBoardTimeCounter.vue";
-import ScoreBoardReset from "@/components/ScoreBoard/ScoreBoardReset.vue";
+import ScoreBoardMineCounter from "@/components/scoreBoard/ScoreBoardMineCounter.vue";
+import ScoreBoardTimeCounter from "@/components/scoreBoard/ScoreBoardTimeCounter.vue";
+import ScoreBoardReset from "@/components/scoreBoard/ScoreBoardReset.vue";
 import GameCell from "@/components/GameCell.vue";
 import {ref, reactive} from "vue";
 
@@ -55,7 +55,7 @@ export default {
         const gameHeight = ref(`${gameSetting.cellSize * gameSetting.cellRow}px`)
 
         const gameState = reactive({
-            // -1: bomb
+            // -1: mine, 0,1,2... : number of mine around the cell
             board: Array.from(Array(gameSetting.cellRow), _ => Array(gameSetting.cellCol).fill(0)),
 
             // 0: not flipped, 1: flipped
@@ -84,6 +84,11 @@ export default {
         }
 
         const rightClick = (flagged) => {
+            // Generate the game board when first clicked
+            if (gameState.status === -1){
+                generateGameBoard(x, y)
+                gameState.status = 0
+            }
             gameState.mineCount = flagged ? gameState.mineCount - 1 : gameState.mineCount + 1
         }
 
