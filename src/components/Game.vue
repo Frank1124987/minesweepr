@@ -15,7 +15,7 @@
         <div id="game">
             <!-- 16 * 16 -->
             <template v-for="(x, key1) in gameSetting.cellRow" >
-                <GameCell v-for="(y, key2) in gameSetting.cellCol" :key="key1 + key2"
+                <GameCell v-for="(y, key2) in gameSetting.cellCol" :key="key1 +'-'+ key2"
                     :gridRow="x"
                     :gridCol="y"
                     :value="gameState.board[x-1][y-1]"

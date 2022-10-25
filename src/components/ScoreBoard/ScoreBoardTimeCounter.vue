@@ -57,6 +57,7 @@ export default {
     right: 10px;
     top: 50%;
     transform: translate(0, -50%);
+    
     width: 100px;
     height: 50px;
 
